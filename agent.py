@@ -133,7 +133,7 @@ def train():
     record = -100
 
     # Setting Map
-    agent, game = setMap('old')
+    agent, game = setMap('new')
 
     while True:
         # get old state
