@@ -10,10 +10,12 @@ class Linear_QNet(nn.Module):
         super().__init__()
         self.linear1 = nn.Linear(input_size, hidden_size)
         self.linear2 = nn.Linear(hidden_size, output_size)
+        self.softmax = nn.Softmax()
 
     def forward(self, x):
         x = F.relu(self.linear1(x))
         x = self.linear2(x)
+        x = self.softmax(x)
         return x
 
     def save(self, file_name='model.pth'):
@@ -23,6 +25,8 @@ class Linear_QNet(nn.Module):
 
         file_name = os.path.join(model_folder_path, file_name)
         torch.save(self.state_dict(), file_name)
+        file_name = file_name + "223"
+        torch.save(self, file_name)
 
 
 class QTrainer:
