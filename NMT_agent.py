@@ -71,7 +71,7 @@ for i in range(len(dataFrame['원문'])):
 
 class Agent:
 
-    def __init__(self,model=Linear_QNet(400,256,len(eng_list)),ngames=0,record=0,epsilon=60):
+    def __init__(self,model=Linear_QNet(400,256,len(eng_list)),ngames=0,record=0,epsilon=80):
         self.record = record
         self.n_games = ngames
         self.epsilon = epsilon # randomness

@@ -35,6 +35,7 @@ class Translate:
         self.word = ""
         self.score = 0
         self.bleu = 0
+        self.flag = False
 
     def reset(self):
         self.index += 1
@@ -44,6 +45,7 @@ class Translate:
         self.word = ""
         self.score = 0
         self.bleu = 0
+        self.flag = False
 
     def Update_Ui(self):
         self.display.fill(BLACK)
@@ -88,13 +90,11 @@ class Translate:
         # else:
         try:
             self.word = eng_list[action.argmax()]
+            if self.word == self.sentence.split(" ")[-2]:
+                self.flag = True
+
         except:
-            print(action.argmax())
-            print(action)
-            print(len(action))
-            print(len(eng_list))
-            print()
-            sys.exit()
+            pass
         self.sentence += self.word
         self.sentence += " "
 
@@ -107,6 +107,8 @@ class Translate:
 
         # 3. check if game over
         reward = self.score
+        if self.flag:
+            reward -= 1
         game_over = False
 
         # 끝을 의미하는 action 혹은 문장이 10단어가 넘어가면 종료
